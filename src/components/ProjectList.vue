@@ -13,11 +13,19 @@ export default {
     };
   },
   methods: {
+    clickNext() {
+      this.currentPage++;
+      this.getProject();
+    },
+    clickBefore() {
+      this.currentPage--;
+      this.getProject();
+    },
     changePage(page) {
       this.currentPage = page;
-      this.getPosts();
+      this.getProject();
     },
-    getPosts() {
+    getProject() {
       axios
         .get("http://localhost:8000/api/projects", {
           params: {
@@ -47,36 +55,38 @@ export default {
 </script>
 
 <template>
-  <h2>The projects</h2>
-  <ul>
-    <li v-for="project in arrProjects" :key="project.id">
-      {{ project.title }}
-    </li>
-  </ul>
-
-  <nav>
-    <ul class="pagination">
-      <li class="page-item disabled">
-        <a class="page-link">Previous</a>
-      </li>
-
-      <li
-        v-for="page in nPages"
-        :key="page"
-        class="page-item"
-        :class="{ active: page == currentPage }"
-      >
-        <span class="page-link" @click="changePage(page)">
-          {{ page }}
-        </span>
-      </li>
-
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
+  <div class="container">
+    <h2>The projects</h2>
+    <ul>
+      <li v-for="project in arrProjects" :key="project.id">
+        {{ project.title }}
       </li>
     </ul>
-  </nav>
-  <div>
+
+    <nav>
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#" @click="clickBefore()">Previous</a>
+        </li>
+
+        <li
+          v-for="page in nPages"
+          :key="page"
+          class="page-item"
+          :class="{ active: page == currentPage }"
+        >
+          <span class="page-link" @click="changePage(page)">
+            {{ page }}
+          </span>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link" href="#" @click="clickNext()">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="container">
     <AppCard :DataCard="this.arrProjects" />
   </div>
 </template>

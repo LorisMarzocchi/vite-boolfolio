@@ -10,7 +10,7 @@ export default {
   <div
     v-for="card in this.DataCard"
     :key="card.id"
-    class="card"
+    class="card mt-4"
     style="width: 400px"
   >
     <img
@@ -29,7 +29,7 @@ export default {
         v-for="tech in card.technologies"
         :key="tech.id"
       >
-        Technologies: {{ tech.name }}
+        Technology used: {{ tech.name }}
       </li>
     </ul>
     <div class="card-body">
