@@ -1,6 +1,10 @@
 <script>
 import axios from "axios";
+import AppCard from "./AppCard.vue";
 export default {
+  components: {
+    AppCard,
+  },
   data() {
     return {
       arrProjects: [],
@@ -72,6 +76,9 @@ export default {
       </li>
     </ul>
   </nav>
+  <div>
+    <AppCard :DataCard="this.arrProjects" />
+  </div>
 </template>
 
 <style></style>
