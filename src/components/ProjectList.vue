@@ -14,12 +14,16 @@ export default {
   },
   methods: {
     clickNext() {
-      this.currentPage++;
-      this.getProject();
+      if (this.currentPage < this.nPages) {
+        this.currentPage++;
+        this.getProject();
+      }
     },
     clickBefore() {
-      this.currentPage--;
-      this.getProject();
+      if (this.currentPage > 1) {
+        this.currentPage--;
+        this.getProject();
+      }
     },
     changePage(page) {
       this.currentPage = page;
