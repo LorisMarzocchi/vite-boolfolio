@@ -1,7 +1,6 @@
 <script>
 import AppNav from "./components/AppNav.vue";
 import AppFooter from "./components/AppFooter.vue";
-
 export default {
   components: {
     AppNav,

@@ -1,6 +1,9 @@
 <script>
 export default {};
 </script>
-<template></template>
+
+<template>
+  <h2>Home page</h2>
+</template>
 
 <style></style>
