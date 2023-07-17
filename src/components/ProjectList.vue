@@ -1,16 +1,18 @@
 <script>
 import axios from "axios";
-import AppCard from "./AppCard.vue";
+import ProjectCard from "./ProjectCard.vue";
+import { store } from "../store";
 export default {
-  components: {
-    AppCard,
-  },
   data() {
     return {
       arrProjects: [],
       currentPage: 1,
       nPages: 0,
+      store,
     };
+  },
+  components: {
+    ProjectCard,
   },
   methods: {
     clickNext() {
@@ -31,7 +33,7 @@ export default {
     },
     getProject() {
       axios
-        .get("http://localhost:8000/api/projects", {
+        .get(this.store.baseUrl + "api/posts", {
           params: {
             page: this.currentPage,
           },
@@ -44,16 +46,12 @@ export default {
   },
   created() {
     // richiesta dati al server
-    axios
-      .get("http://localhost:8000/api/projects", {
-        params: {
-          page: this.currentPage,
-        },
-      })
-      .then((response) => {
-        this.arrProjects = response.data.data;
-        this.nPages = response.data.last_page;
-      });
+    this.getPosts();
+  },
+  watch: {
+    currentPage() {
+      this.getPosts();
+    },
   },
 };
 </script>
@@ -90,8 +88,10 @@ export default {
       </ul>
     </nav>
   </div>
-  <div class="container">
-    <AppCard :DataCard="this.arrProjects" />
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 mb-5">
+    <div class="col" v-for="project in arrProjects" :key="project.id">
+      <PostCard :dataProject="project" />
+    </div>
   </div>
 </template>
 

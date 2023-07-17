@@ -1,16 +1,24 @@
 <script>
-import ProjectList from "./components/ProjectList.vue";
+import AppNav from "./components/AppNav.vue";
+import AppFooter from "./components/AppFooter.vue";
 
 export default {
   components: {
-    ProjectList,
+    AppNav,
+    AppFooter,
   },
 };
 </script>
 
 <template>
-  <h1 class="mx-3">Laravel Boolfolio - API</h1>
-  <ProjectList />
+  <AppNav />
+
+  <div class="container">
+    <h1>Boolfolio</h1>
+    <router-view></router-view>
+  </div>
+
+  <AppFooter />
 </template>
 
 <style lang="scss">
