@@ -18,18 +18,19 @@ export default {
     getImageUrl(image) {
       return image
         ? this.store.baseUrl + "storage/" + image
-        : this.store.baseUrl + "storage/default.jpg";
+        : this.store.baseUrl + "storage/defaultImage/default.jpg";
     },
   },
 };
 </script>
 
 <template>
-  <div class="card mt-4" style="width: 400px">
+  <div class="card h-100">
     <img
-      :src="this.store.baseUrl + 'storage/' + dataProject.image"
+      :src="getImageUrl(dataProject.image)"
       class="card-img-top"
-      :alt="card.title"
+      :alt="dataProject.title"
+      style="height: 200px"
     />
     <div class="card-body">
       <h5 class="card-title">{{ dataProject.title }}</h5>
@@ -37,16 +38,19 @@ export default {
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Type: {{ dataProject.type.name }}</li>
-      <li
-        class="list-group-item"
-        v-for="tech in dataProject.technologies"
-        :key="tech.id"
-      >
-        Technology used: {{ tech.name }}
+      <li class="list-group-item">
+        Technology used:
+        <span v-for="tech in dataProject.technologies" :key="tech.id">{{
+          tech.name + " "
+        }}</span>
       </li>
     </ul>
     <div class="dataProject-body">
-      <a :href="card.link_github" class="card-link">Link Github</a>
+      <router-link
+        class="btn btn-primary m-2"
+        :to="{ name: 'projects.show', params: { slug: dataProject.slug } }"
+        >view</router-link
+      >
     </div>
   </div>
 </template>

@@ -1,4 +1,4 @@
 import { reactive } from "vue";
-export default store = reactive({
+export const store = reactive({
   baseUrl: "http://localhost:8000/",
 });

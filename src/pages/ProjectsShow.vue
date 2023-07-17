@@ -1,6 +1,6 @@
 <script>
-import axios from "axios";
 import { store } from "../store";
+import axios from "axios";
 
 export default {
   data() {
@@ -9,17 +9,16 @@ export default {
     };
   },
   created() {
-    // richiesta axios per i dati del post
-    // esempio: http://localhost:8000/api/posts/iusto-hic-libero-culpa-sit-similique
+    // fai la richiesta axios
     axios
-      .get(this.store.baseUrl + "api/posts/" + this.$route.params.slug)
-      .then((response) => console.log(response));
+      .get(this.store.baseUrl + "api/projects/" + this.$route.params.slug)
+      .then((response) => response.data.data);
   },
 };
 </script>
 
 <template>
-  <h2>Sono la show</h2>
+  <h2>show</h2>
 </template>
 
 <style></style>
