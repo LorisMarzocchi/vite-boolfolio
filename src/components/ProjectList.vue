@@ -8,6 +8,7 @@ export default {
   data() {
     return {
       arrProjects: [],
+      arrTypes: [],
       currentPage: 1,
       nPages: 0,
       activePage: 1,
@@ -40,6 +41,11 @@ export default {
           this.nPages = response.data.results.last_page;
         });
     },
+    getTypes() {
+      axios.get(this.store.baseUrl + "api/types").then((response) => {
+        this.arrTypes = response.data.results;
+      });
+    },
   },
   created() {
     // richiesta dati al server
@@ -54,16 +60,17 @@ export default {
     //     this.nPages = response.data.last_page;
     //   });
     this.getProjects();
+    this.getTypes();
   },
   watch: {
-    "$route.query.q": {
-      immediate: true,
-      handler: function (newVal, oldVal) {
-        if (newVal !== oldVal) {
-          this.getProjects();
-        }
-      },
-    },
+    // "$route.query.q": {
+    //   immediate: true,
+    //   handler: function (newVal, oldVal) {
+    //     if (newVal !== oldVal) {
+    //       this.getProjects();
+    //     }
+    //   },
+    // },
 
     currentPage() {
       this.getProjects();
@@ -73,11 +80,15 @@ export default {
 </script>
 
 <template>
-  <ul>
-    <li v-for="project in arrProjects" :key="project.id">
-      <span>{{ project.title }}</span>
-    </li>
-  </ul>
+  <form>
+    <h2>Project filter</h2>
+    <label for="type">Type</label>
+    <select class="form-select mb-5" id="type">
+      <option v-for="type in arrTypes" :key="type.id" :value="type.id">
+        {{ type.name }}
+      </option>
+    </select>
+  </form>
 
   <nav>
     <ul class="pagination">
