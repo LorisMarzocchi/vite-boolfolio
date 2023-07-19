@@ -1,12 +1,17 @@
 <script>
 import { store } from "../store";
 import axios from "axios";
+import App404 from "./App404.vue";
 
 export default {
+  components: {
+    App404,
+  },
   data() {
     return {
       store,
       project: null,
+      is404: false,
     };
   },
   methods: {
@@ -20,22 +25,49 @@ export default {
     axios
       .get(this.store.baseUrl + "api/projects/" + this.$route.params.slug)
       .then((response) => {
-        this.project = response.data;
+        if (response.data.success) {
+          this.project = response.data.results;
+        } else {
+          // this.$router.push({ name: 'page404' });
+          this.is404 = true;
+        }
       });
   },
 };
+// export default {
+//   data() {
+//     return {
+//       store,
+//       project: null,
+//     };
+//   },
+
+//   created() {
+//     axios
+//       .get(this.store.baseUrl + "api/projects/" + this.$route.params.slug)
+//       .then((response) => {
+//         this.project = response.data.results;
+//       });
+//   },
+// };
 </script>
 
 <template>
   <div>
-    <h2>Project</h2>
+    <App404 v-if="is404" />
     <div v-if="project">
       <h3 class="text-danger">{{ project.title }}</h3>
+      <img
+        style="height: 400px; width: 400px"
+        :src="this.store.getImageUrl(project.image)"
+        :alt="project.title"
+      />
+
       <p>{{ project.description }}</p>
     </div>
-    <div v-else>
+    <!-- <div v-else>
       <p>Caricamento...</p>
-    </div>
+    </div> -->
   </div>
 </template>
 

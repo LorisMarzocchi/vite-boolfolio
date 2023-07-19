@@ -1,8 +1,9 @@
 <script>
 export default {};
 </script>
+
 <template>
-  <h1 class="bg-danger">Footer</h1>
+  <h1>About</h1>
 </template>
 
-<style></style>
+<style lang="scss" scoped></style>

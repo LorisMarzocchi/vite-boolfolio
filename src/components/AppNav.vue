@@ -1,12 +1,18 @@
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      searchString: "",
+    };
+  },
+};
 </script>
 
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <router-link class="navbar-brand" :to="{ name: 'home' }"
-        >Boolpress</router-link
+        >Boolfolio</router-link
       >
 
       <button
@@ -31,13 +37,32 @@ export default {};
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">About us</a>
+            <router-link :to="{ name: 'about' }" class="nav-link active"
+              >About</router-link
+            >
+          </li>
+          <li class="nav-item">
+            <router-link :to="{ name: 'contact' }" class="nav-link"
+              >Contact</router-link
+            >
           </li>
         </ul>
-        <!-- <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form> -->
+        <!-- <form
+          class="d-flex"
+          role="search"
+          @submit.prevent="
+            $router.push({ name: 'projects.index', query: { q: searchString } })
+          "
+        >
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            v-model="searchString"
+          />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> -->
       </div>
     </div>
   </nav>
