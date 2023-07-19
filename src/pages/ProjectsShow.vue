@@ -27,6 +27,7 @@ export default {
       .then((response) => {
         if (response.data.success) {
           this.project = response.data.results;
+          console.log(response.data.results);
         } else {
           // this.$router.push({ name: 'page404' });
           this.is404 = true;
@@ -62,7 +63,12 @@ export default {
         :src="this.store.getImageUrl(project.image)"
         :alt="project.title"
       />
-
+      <li class="list-group-item">
+        Technology used:
+        <span v-for="tech in project.technologies" :key="tech.id">{{
+          tech.name + " "
+        }}</span>
+      </li>
       <p>{{ project.description }}</p>
     </div>
     <!-- <div v-else>

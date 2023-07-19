@@ -47,7 +47,7 @@ export default {
             >
           </li>
         </ul>
-        <!-- <form
+        <form
           class="d-flex"
           role="search"
           @submit.prevent="
@@ -59,10 +59,11 @@ export default {
             type="search"
             placeholder="Search"
             aria-label="Search"
+            name="q"
             v-model="searchString"
           />
           <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
+        </form>
       </div>
     </div>
   </nav>

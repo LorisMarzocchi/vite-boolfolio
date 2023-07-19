@@ -56,6 +56,15 @@ export default {
     this.getProjects();
   },
   watch: {
+    "$route.query.q": {
+      immediate: true,
+      handler: function (newVal, oldVal) {
+        if (newVal !== oldVal) {
+          this.getProjects();
+        }
+      },
+    },
+
     currentPage() {
       this.getProjects();
     },
@@ -66,7 +75,7 @@ export default {
 <template>
   <ul>
     <li v-for="project in arrProjects" :key="project.id">
-      <a href="">{{ project.title }}</a>
+      <span>{{ project.title }}</span>
     </li>
   </ul>
 
