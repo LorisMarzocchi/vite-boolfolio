@@ -80,8 +80,9 @@ export default {
 </script>
 
 <template>
+  <h2>Project filter</h2>
+
   <form>
-    <h2>Project filter</h2>
     <label for="type">Type</label>
     <select class="form-select mb-5" id="type">
       <option v-for="type in arrTypes" :key="type.id" :value="type.id">
